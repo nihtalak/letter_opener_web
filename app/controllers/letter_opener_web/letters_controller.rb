@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-unless Rails.respond_to?(:autoloaders) && Rails.autoloaders.zeitwerk_enabled?
+if ActiveRecord::VERSION::MAJOR >= 7
   require_dependency 'letter_opener_web/application_controller'
+else
+  unless Rails.respond_to?(:autoloaders) && Rails.autoloaders.zeitwerk_enabled?
+    require_dependency 'letter_opener_web/application_controller'
+  end
 end
 
 module LetterOpenerWeb
